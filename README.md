@@ -32,7 +32,7 @@ sudo tar cvpzf /backup.tgz --exclude=/proc --exclude=/lost+found --exclude/=back
 
 
 //Создан установочный образ системы
-НАЖАТЬ УСТРОЙСТВА - ПОДКЛЮЧИТЬ ОБРАЗ ГОСТЕВОЙ ОС И СФОТКАТЬ НОВЫЙ ДИСК
+sudo dd if=/dev/sda of=/home/pasha/ubuntu_backup.iso bs=4M status=progress    //ПУТЬ САМИ УКАЖИТЕ КУДА СОХРАНЯТЬ(ДЕЛАЙТЕ ВО ВТОРОМ ТЕРМИНАЛЕ)
 
 //точка восстановы
 sudo apt install timeshift -y 
@@ -41,6 +41,14 @@ sudo timeshift --create //ДЕЛАЙТЕ ВО ВТОРОМ ТЕРМИНАЛЕ Т
 //Группы пользователей 
 sudo apt install gnome-system-tools //утилита для создания групп
 ЧТОБЫ СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ ЗАЙТИ В НАСТРОЙКИ -СИСТЕМА -ДОБАВИТЬ НОВОГО НЕ ДАВАТЬ ЕМУ ПРАВА АДМИНА ДОБАВИТЬ ПАРОЛЬ - ЗАЙТИ В ПРОГРАММУ ПОЛЬЗОВАТЕЛИ И ГРУППЫ - ПОТЫКАТЬ ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ С ПРАВАМИ ТО ЕСТЬ РУТА В ГРУППУ АДМИНОВ А ПОЛЬЗОВАТЕЛЯ БЕЗ ПРАВ В ГРУППУ ЮЗЕРОВ И ВОТ ВЫ ВЫПОЛНИЛИ ВСЕ ЗАДАНИЯ ПО ПОЛЬЗОВАТЕЛЯМ
+
+// Журнал мониторинга
+sudo apt install auditd -y
+sudo auditctl -w /etc/passwd -p wa -k passwd_changes
+sudo ausearch -k passwd_changes
+sudo systemctl status auditd // НА ФОТКУ
+
+
 
 //антивирус
 sudo apt install fail2ban
